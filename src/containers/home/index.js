@@ -43,6 +43,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/tabScreens')
 }, dispatch)
 
-export default FadeWrapper(connect(
+export default connect(
   mapStateToProps,
-mapDispatchToProps)(Home))
+mapDispatchToProps)(Home)

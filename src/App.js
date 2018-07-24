@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom'
 
-import FadeWrapper from '../../hoc/FadeWrapper'
-import Home from '../home'
-import Page2 from '../page2'
-import Page3 from '../page3'
-import TabScreens from '../tabScreen'
+import FadeWrapper from './hoc/FadeWrapper'
+import Home from './containers/home'
+import Page2 from './containers/page2'
+import Page3 from './containers/page3'
+import TabScreens from './containers/tabScreen'
 
 import { connect } from "react-redux";
 
@@ -20,15 +20,6 @@ class App extends Component {
   }
 
   render() {
-
-    //             <Link to="/showPost/:{this.props.activePost}">Go to ShowPost</Link>:::
-    //
-    //  github static hosting has problems with react router.
-    //  i already switched to hash history. might also need to add the public_url in front of the routing paths
-    //  there s a hack to make react router work.. its hacky..
-    //
-    //     <Route exact path={`${process.env.PUBLIC_URL}/other/:contentId`} component={FadeWrapper(OtherPage)} />
-
 
     return(
 
