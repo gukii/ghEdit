@@ -33,7 +33,7 @@ class App extends Component {
     return(
 
       <TransitionGroup className='someClass'>
-            <Route exact path="/" component={FadeWrapper(Home)} />
+            <Route exact path="/" component={FadeWrapper(TabScreens)} />
             <Route exact path="/2" component={FadeWrapper(Page2)} />
             <Route exact path="/3" component={FadeWrapper(Page3)} />
             <Route exact path="/tabScreens:tabId" component={FadeWrapper(TabScreens)} />

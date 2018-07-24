@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga'
 import createHistory from 'history/createHashHistory'
 import rootReducer from './reducers'
 
-import mySaga from './sagas/mySaga' 
+import mySaga from './sagas/mySaga'
 
 import { loadState, saveState } from './helpers/localStorage'
 import throttle from 'lodash/throttle'

@@ -47,6 +47,7 @@ class TabScreens extends React.Component {
 
   render() {
     const params = !!this.props.match.params && this.props.match.params.tabId ? this.props.match.params : { tabId: ':tab1' }
+
     const screenHeight = this.state.screenSize.height? this.state.screenSize.height+'px' : '300px'
     //console.log('## screenHeight:', screenHeight)
 

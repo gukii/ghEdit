@@ -30,5 +30,6 @@
     "babel-plugin-import": "^1.6.3",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.1"
-  }
+  },
+  "proxy": "https://gukii.github.io/ghEdit/"
 }
