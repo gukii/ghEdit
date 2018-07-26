@@ -2,10 +2,13 @@ import React from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import FadeWrapper from '../../hoc/FadeWrapper'
+//import FadeWrapper from '../../hoc/FadeWrapper'
+import { GH_CREATE_FILE_REQ } from '../../reducers/github'
 
 
 import { Button, NavBar, Icon } from 'antd-mobile'
+import { CreateFileDialog } from './createFileDialog'
+
 
 
 const Home = props => (
@@ -22,27 +25,55 @@ const Home = props => (
 
     <h1>Home</h1>
 
-    <Button type="primary">Button</Button>
+    <Button type="outline" onClick={ (e) => {
+        //e.preventDefault()
+        //e.stopPropagation()
+        CreateFileDialog(props.createFile)
+      }
+    }>Create File</Button>
 
 
 
     <p><button onClick={() => props.changePage()}>Go to Page2</button></p>
 
 
-
-
   </div>
 )
 
+
+/*
 const mapStateToProps = state => ({
 
 })
+*/
+
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  //changePage: () => push('/tabScreens')
-  changePage: () => push('/tabScreens')
+  changePage: () => push('/tabScreens:tab2'),
+  createFile: ({fileName}) => {
+      console.log('props createFile:', fileName)
+      return {  type: GH_CREATE_FILE_REQ,
+                  payload: { ghFileName: fileName, fileContents: "..created by pressing a button.." }
+              }
+  }
 }, dispatch)
 
+
+/*
+const mapDispatchToProps = dispatch => {
+  return {
+    changePage: () => dispatch(push('/tabScreens:tab2')),
+    createFile: ({fileName}) => {
+        console.log('props createFile:', fileName)
+        dispatch({  type: GH_CREATE_FILE_REQ,
+                    payload: { ghFileName: fileName, fileContents: "..created by pressing a button.." }
+                })
+    }
+  }
+}
+*/
+
+
 export default connect(
-  mapStateToProps,
+  null,
 mapDispatchToProps)(Home)

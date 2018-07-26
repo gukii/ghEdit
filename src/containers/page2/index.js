@@ -10,7 +10,7 @@ import { Button, NavBar, Icon, Carousel, WingBlank } from 'antd-mobile'
 class Page2 extends React.Component {
   state = {
     data: ['https://i.imgur.com/wyv6qVY.jpg', 'https://i.imgur.com/UUVHsU5.jpg'],
-    imgHeight: 176,
+    imgHeight: 100,
   }
   componentDidMount() {
     // simulate img loading
@@ -45,7 +45,7 @@ class Page2 extends React.Component {
           {this.state.data.map(val => (
             <a
               key={val}
-              href="http://www.alipay.com"
+              href="http://www.bucuo.com/"
               style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
             >
               <img
@@ -63,9 +63,12 @@ class Page2 extends React.Component {
         </Carousel>
       </WingBlank>
 
-      <text>
-        some text here..
-      </text>
+      <br />
+
+      <WingBlank>
+        <Button type="outline">Button</Button>
+      </WingBlank>
+
 
       </span>
     );

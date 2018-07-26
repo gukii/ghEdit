@@ -27,6 +27,7 @@ class App extends Component {
             <Route exact path="/" component={FadeWrapper(TabScreens)} />
             <Route exact path="/2" component={FadeWrapper(Page2)} />
             <Route exact path="/3" component={FadeWrapper(Page3)} />
+            <Route exact path="/home" component={FadeWrapper(Home)} />
             <Route exact path="/tabScreens:tabId" component={TabScreens} />
             <Route exact path="/tabScreens" component={(TabScreens)} />
       </TransitionGroup>

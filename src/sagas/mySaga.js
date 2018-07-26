@@ -1,14 +1,42 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'  // ,  takeEvery
 //import Api from '...'
+//import Octokat from 'octokat';
+import { writeGhFile } from '../helpers/github'
+import { GH_CREATE_FILE_REQ, GH_CREATE_FILE_SUCCEED, GH_CREATE_FILE_FAIL } from '../reducers/github'
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchUser(action) {
-   try {
-      //const user = yield call(Api.fetchUser, action.payload.userId);
-      yield put({type: "USER_FETCH_SUCCEEDED", user: 'user'});
-   } catch (e) {
-      yield put({type: "USER_FETCH_FAILED", message: e.message});
-   }
+
+const creds = {
+  ghRepo: 'buhao',
+  ghUser: 'gukii',
+  ghPass: '',
+  ghFolder: '_temp',
+  ghFileName: '',
+  fileContents: 'My first file from Saga..'
+}
+
+
+// worker Saga: will be fired on GH_CREATE_FILE_REQ actions
+function* ghCreateFile(action) {
+
+  console.log('~~took action:', action)
+  const {payload} = action
+
+  const ghFileName = payload && payload.ghFileName ? payload.ghFileName : 'noName.markdown'
+  const fileContents = payload && payload.fileContents ? payload.fileContents : 'empty..'
+
+  const myObj = { ...creds, ghFileName, fileContents }
+  console.log('myObj:', myObj)
+
+
+  const resp = yield call (writeGhFile, myObj)
+
+  console.log('resp:', resp)
+
+  if (resp.success) {
+    yield put( {type: GH_CREATE_FILE_SUCCEED, payload: resp} )
+  } else {
+    yield put( {type: GH_CREATE_FILE_FAIL, payload: resp} )
+  }
 }
 
 /*
@@ -16,7 +44,7 @@ function* fetchUser(action) {
   Allows concurrent fetches of user.
 */
 function* mySaga() {
-  yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
+  yield takeLatest(GH_CREATE_FILE_REQ, ghCreateFile);
 }
 
 /*

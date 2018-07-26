@@ -20,7 +20,7 @@ export const history = createHistory()
 // got saveState from Abramov:
 // https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage
 
-let persistedState = loadState()
+let persistedState = {} /*loadState()
 if (!!persistedState) {
   // got persistedState.
 } else {
@@ -28,6 +28,9 @@ if (!!persistedState) {
 }
 
 console.log('persistedState loaded:', persistedState)
+*/
+
+
 //persistedState = {...persistedState, graph:{}}
 // if auth.authExpirationTS has passed.. where should i re-auth? probably not here..
 // ... but here i could set re-auth-required flag in redux store..
@@ -63,8 +66,6 @@ const composedEnhancers = compose(
 
 
 
-
-
 const store = createStore(
   rootReducer,
   //initialState,
@@ -73,43 +74,50 @@ const store = createStore(
 )
 
 
-
+console.log('calling sagaMiddleware.run(mySaga)..mysaga:', mySaga)
 // then run the saga
 sagaMiddleware.run(mySaga)
 
 
-
+/*
 // temporary here..
 export const storeSaveState = () => {
   saveState(store.getState() )
   console.log('storeSaveState executed')
 }
+*/
 
 
+
+/*
 // save state every time something gets saved into redux store
 store.subscribe( throttle( () => {
 
     //saveState(store.getState() )  // turned off the store auto-save, for debugging purposes
-    /*
+
     saveState({
       auth: store.getState().auth,
       graph: store.getState().graph,
-
     })
 
     console.log('# redux store saved..')
 
-    */
+
   }, 1000)
 )
+    */
 
 
+
+/*
+// forwarding app to an address, if there s no persisted state.
+// e.g. forward to settings page
 if (!persistedState) {
   store.dispatch(push('/other'))
   //store.dispatch(push('/tabScreens'))
 
 }
-
+*/
 
 
 

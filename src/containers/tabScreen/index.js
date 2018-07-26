@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { connect } from "react-redux"
-import { withRouter } from 'react-router-dom'
-import { goBack, push } from 'react-router-redux'
+// import { withRouter } from 'react-router-dom'
+import { push } from 'react-router-redux' // goBack,
 import { bindActionCreators } from 'redux'
 
 
@@ -20,8 +20,8 @@ import Home from '../home'
 import Page2 from '../page2'
 import Page3 from '../page3'
 
-import FadeWrapper from '../../hoc/FadeWrapper'
-import { TransitionGroup } from 'react-transition-group'
+//import FadeWrapper from '../../hoc/FadeWrapper'
+//import { TransitionGroup } from 'react-transition-group'
 
 
 

@@ -1,34 +1,16 @@
-import React, { Component } from "react";
+//import React, { Component } from "react";
 //import { View, Text } from "react-native";
 //import Settings from '../utils/settings';
 
-import { connect } from "react-redux"
-import { withRouter } from 'react-router-dom'
+//import { connect } from "react-redux"
+//import { withRouter } from 'react-router-dom'
 
-//import { List, ActivityIndicator, Icon, Toast, Modal, Button, SwipeAction } from 'antd-mobile';
-
-/*
-import SwipeAction from 'antd-mobile/lib/swipe-action'
-import Modal from 'antd-mobile/lib/modal'
-import Button from 'antd-mobile/lib/button'
-import Toast from 'antd-mobile/lib/toast'
-import Icon from 'antd-mobile/lib/icon'
-import ActivityIndicator from 'antd-mobile/lib/activity-indicator'
-import List from 'antd-mobile/lib/list'
-*/
 
 import Octokat from 'octokat';
 //import base64 from 'base-64';
 
-import formatBytes from '../../helpers/formatBytes.js';
-import { hDecode, hEncode } from '../../helpers/hash'
-//import truncate from 'truncate-utf8-bytes'  // probably not needed anymore..
-//import { scaleImg } from '../showPost'
-//import shortid from 'shortid'
-
-import { date2str, text_truncate, sanitizeNewLineForMD, sanitizeFrontMatterForMD, removeDangerousChars } from '../../helpers/general'
-
-//const Item = List.Item
+//import formatBytes from '../../helpers/formatBytes.js';
+//import { hDecode, hEncode } from '../../helpers/hash'
 
 
 // need this because octokat relies on atob, which react-native seems lacking
@@ -59,6 +41,7 @@ if (!global.atob) {
 
             if (item.path === filePath) return true
 
+            return false
             //if (item.path.includes(filePath)) return true
             //item.path.trim() === filePath.trim()
           })
@@ -91,6 +74,7 @@ if (!global.atob) {
           //console.log('updateGhFile about to call ghApi for update/write..', newConfig)
           // perform write / update  (could use writeGhFile function above.. but testing for now.. )
           // will only update if contents has changed.
+          console.log('about to call with octo..')
           const res = await octo.repos(home, repo).contents(filePath).add(newConfig)
 
           console.log('updateGhFile res:', res, ' returning resolved promise..')
@@ -112,7 +96,7 @@ if (!global.atob) {
   // ghFolder has no trailing /
   // fileContents can be chinese characters.....: unescape( encodeURIComponent) are applied before btoa.
 
-  export async function writeGhFile({ ghRepo, ghUser, ghPass, ghFolder, ghFileName='', fileContents='', createGhMsg='Created by farmersDelight', updateGhMsg='Updated by farmersDelight' }) {
+  export async function writeGhFile({ ghRepo, ghUser, ghPass, ghFolder='', ghFileName='', fileContents='', createGhMsg='Created by farmersDelight', updateGhMsg='Updated by farmersDelight' }) {
 
     //const { ghUser, ghPass, ghRepo, ghFolder } = ghCredentials  // folder will likely depend on the tag/filter used in later versions
     const ghHome = ghUser
@@ -141,7 +125,7 @@ if (!global.atob) {
       const resp = await octo3.repos(ghHome, ghRepo).contents(ghFilePath).add(newConfig)
 
 
-      console.log('response from create operation:', resp);
+      console.log('response from create operation (without err):', resp);
       console.log('File Created. commit sha is', resp.commit.sha);
       console.log('File Created. content sha is', resp.content.sha);
 
@@ -152,8 +136,16 @@ if (!global.atob) {
 
 
     } catch (err) {
-      console.error(err)
+      console.log('!!cauth error:', err)
 
+      //err.stopPropagation()
+/*
+      if (err.indexOf("NetworkError") > -1) {
+      //if (err.TypeError === "NetworkError when attempting to fetch resource.") {
+        console.log('!! returning early because of network error..')
+        return Promise.reject({ err, success: false })
+      }
+*/
       console.log('file creation raised a predictable error, trying to call update function "updateGhFile"')
       // try again, this time updating the file.. most of the times new file creation is the norm, not many updates
       const res = updateGhFile({  octo: octo3,
@@ -164,7 +156,14 @@ if (!global.atob) {
                                   folder: ghFolder.length > 0? ghFolder : '',
                                   updateMsg: updateGhMsg
                                })
-      console.log('renderGithubJekyllFile (updateGhFile): ', res)
+      console.log('updateGhFile res: ', res)
+
+      if (res.success) {
+        console.log('..ALL SUCCESS')
+      } else {
+        console.log('..ALL NO SUCCESS')
+      }
+
       return(res)
       //return Promise.resolve(res)
 
