@@ -8,8 +8,8 @@ import rootReducer from './reducers'
 
 import mySaga from './sagas/mySaga'
 
-import { loadState, saveState } from './helpers/localStorage'
-import throttle from 'lodash/throttle'
+import { saveState } from './helpers/localStorage'
+//import throttle from 'lodash/throttle'
 import { push } from 'react-router-redux'
 
 
@@ -79,13 +79,13 @@ console.log('calling sagaMiddleware.run(mySaga)..mysaga:', mySaga)
 sagaMiddleware.run(mySaga)
 
 
-/*
+
 // temporary here..
 export const storeSaveState = () => {
-  saveState(store.getState() )
-  console.log('storeSaveState executed')
+  //saveState(store.getState() )
+  //console.log('storeSaveState executed')
 }
-*/
+
 
 
 
@@ -109,15 +109,15 @@ store.subscribe( throttle( () => {
 
 
 
-/*
+
 // forwarding app to an address, if there s no persisted state.
 // e.g. forward to settings page
 if (!persistedState) {
-  store.dispatch(push('/other'))
+  store.dispatch(push('/settings'))
   //store.dispatch(push('/tabScreens'))
 
 }
-*/
+
 
 
 

@@ -33,13 +33,22 @@ const Page3 = props => (
   </div>
 )
 
+
+
+
 const mapStateToProps = state => ({
 
 })
 
+
+
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/')
 }, dispatch)
+
+
+
 
 export default connect(
   mapStateToProps,

@@ -5,6 +5,7 @@
   "dependencies": {
     "antd-mobile": "^2.2.2",
     "lodash": "^4.17.10",
+    "hashids": "^1.1.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",

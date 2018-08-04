@@ -2,7 +2,7 @@ import { Modal } from 'antd-mobile'
 
 
 // props.callback function to return entered filename
-export function CreateFileDialog(callback) {
+export function LaunchFileDialog(callback) {
   return(
     Modal.prompt('Create File', 'Please input a File name', [
     		{ text: 'Cancel' },

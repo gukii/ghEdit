@@ -11,14 +11,18 @@ import { TabBar  } from 'antd-mobile'
 
 
 // feed
-import MdSpeakerNotesOff from 'react-icons/lib/md/speaker-notes-off'  // looks like 'no feed'
-import MdSpeakerNotes from 'react-icons/lib/md/speaker-notes'
+import MdSpeakerNotesOff from 'react-icons/lib/md/speaker-notes-off'  // looks like 'no feed' icon
+import MdSpeakerNotes from 'react-icons/lib/md/speaker-notes' // feed icon
+
+import FaCogs from 'react-icons/lib/fa/cogs'  // settings
+
 
 
 
 import Home from '../home'
 import Page2 from '../page2'
 import Page3 from '../page3'
+import Settings from '../settings'
 
 //import FadeWrapper from '../../hoc/FadeWrapper'
 //import { TransitionGroup } from 'react-transition-group'
@@ -29,7 +33,7 @@ import Page3 from '../page3'
 // for screen-size determination i could use this HOC:
 // https://www.npmjs.com/package/react-window-size
 
-class TabScreens extends React.Component {
+class TabScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -48,6 +52,8 @@ class TabScreens extends React.Component {
   render() {
     const params = !!this.props.match.params && this.props.match.params.tabId ? this.props.match.params : { tabId: ':tab1' }
 
+    console.log('this.props.match.params:', this.props.match.params)
+    
     const screenHeight = this.state.screenSize.height? this.state.screenSize.height+'px' : '300px'
     //console.log('## screenHeight:', screenHeight)
 
@@ -98,7 +104,7 @@ class TabScreens extends React.Component {
             onPress={() => {
               this.props.changeTab(':tab2')
             }}
-            data-seed="logId"
+            data-seed="logId2"
           >
 
             <div style={{ backgroundColor: 'white', height: screenHeight, textAlign: 'center', overflowY:'scroll' }}>
@@ -113,21 +119,45 @@ class TabScreens extends React.Component {
 
 
           <TabBar.Item
+            title="Page3"
+            key="Tab3"          
             icon={(<MdSpeakerNotes />)}
             selectedIcon={(<MdSpeakerNotes />)}
-            title="Page3"
-            key="Tab3"
-            dot
+
             selected={params.tabId === ':tab3'}
             onPress={() => {
               this.props.changeTab(':tab3')
             }}
+            dot
+
+            data-seed="logId3"
           >
 
-            <Page3 />
+            <div>
+              <Page3 />
+            </div>
+
+          </TabBar.Item>
 
 
 
+
+          <TabBar.Item
+            icon={(<FaCogs />)}
+            selectedIcon={(<FaCogs />)}
+            title="Settings"
+            key="Tab4"
+            dot
+            selected={params.tabId === ':tab4'}
+            onPress={() => {
+              this.props.changeTab(':tab4')
+            }}
+            data-seed="logId4"
+          >
+
+            <div>
+              <Settings />
+            </div>            
 
           </TabBar.Item>
 
@@ -139,59 +169,15 @@ class TabScreens extends React.Component {
   }
 }
 
-//export default TabScreens
+// typing links directly into address bar works, hover, pushing thru redux router does not.
+// correct url typed into address bar: http://localhost:3001/#/tabScreens:tab3
+// 
 
+//export default TabScreen
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changeTab: (tab) => push('/tabScreens'+tab)
+  changeTab: (tab) => push('/tabScreen'+tab) // push('/#'+tab)
 }, dispatch)
 
 export default connect(
   null,
-mapDispatchToProps)(TabScreens)
-
-
-/*
-
-            icon={
-              <MdSpeakerNotesOff style={{
-                  width: '22px',
-                  height: '22px'
-                }}
-                badge={'X'}
-              />}
-
-*/
-
-
-
-// overflow-y:scroll
-/*
-
-  renderContent(pageText) {
-    return (
-      <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-        <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
-        <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              hidden: !this.state.hidden,
-            });
-          }}
-        >
-          Click to show/hide tab-bar
-        </a>
-        <a style={{ display: 'block', marginBottom: 600, color: '#108ee9' }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              fullScreen: !this.state.fullScreen,
-            });
-          }}
-        >
-          Click to switch fullscreen
-        </a>
-      </div>
-    );
-  }
-*/
+mapDispatchToProps)(TabScreen)

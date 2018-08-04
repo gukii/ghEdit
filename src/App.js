@@ -5,7 +5,8 @@ import FadeWrapper from './hoc/FadeWrapper'
 import Home from './containers/home'
 import Page2 from './containers/page2'
 import Page3 from './containers/page3'
-import TabScreens from './containers/tabScreen'
+import TabScreen from './containers/tabScreen'
+import Settings from './containers/settings'
 
 import { connect } from "react-redux";
 
@@ -24,12 +25,14 @@ class App extends Component {
     return(
 
       <TransitionGroup className='someClass'>
-            <Route exact path="/" component={FadeWrapper(TabScreens)} />
+            <Route exact path="/" component={FadeWrapper(TabScreen)} />
             <Route exact path="/2" component={FadeWrapper(Page2)} />
             <Route exact path="/3" component={FadeWrapper(Page3)} />
             <Route exact path="/home" component={FadeWrapper(Home)} />
-            <Route exact path="/tabScreens:tabId" component={TabScreens} />
-            <Route exact path="/tabScreens" component={(TabScreens)} />
+            <Route exact path="/settings" component={FadeWrapper(Settings)} /> 
+
+            <Route exact path="/tabScreen:tabId" component={TabScreen} />
+            <Route exact path="/tabScreen" component={(TabScreen)} />
       </TransitionGroup>
 
     ) // return

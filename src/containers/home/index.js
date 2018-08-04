@@ -7,7 +7,7 @@ import { GH_CREATE_FILE_REQ } from '../../reducers/github'
 
 
 import { Button, NavBar, Icon } from 'antd-mobile'
-import { CreateFileDialog } from './createFileDialog'
+import { LaunchFileDialog } from './launchFileDialog'
 
 
 
@@ -28,7 +28,7 @@ const Home = props => (
     <Button type="outline" onClick={ (e) => {
         //e.preventDefault()
         //e.stopPropagation()
-        CreateFileDialog(props.createFile)
+        LaunchFileDialog(props.createFile)
       }
     }>Create File</Button>
 
@@ -49,11 +49,11 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: () => push('/tabScreens:tab2'),
+  changePage: () => push('/tabScreen:tab2'),
   createFile: ({fileName}) => {
       console.log('props createFile:', fileName)
       return {  type: GH_CREATE_FILE_REQ,
-                  payload: { ghFileName: fileName, fileContents: "..created by pressing a button.." }
+                payload: { ghFileName: fileName, fileContents: "..created by pressing a button.." }
               }
   }
 }, dispatch)

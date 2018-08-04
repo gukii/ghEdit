@@ -8,7 +8,7 @@ import { GH_CREATE_FILE_REQ, GH_CREATE_FILE_SUCCEED, GH_CREATE_FILE_FAIL } from 
 const creds = {
   ghRepo: 'buhao',
   ghUser: 'gukii',
-  ghPass: '',
+  ghPass: '9496505e98eb8ffbeac49bc5b614c74a40e986ed',
   ghFolder: '_temp',
   ghFileName: '',
   fileContents: 'My first file from Saga..'
