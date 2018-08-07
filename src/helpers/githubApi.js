@@ -139,7 +139,9 @@ if (!global.atob) {
       console.log('!!cauth error:', err)
 
       //err.stopPropagation()
-/*
+      
+/*    // !!!trying to find a way to raise error when there s no network connection !!! not working yet..
+
       if (err.indexOf("NetworkError") > -1) {
       //if (err.TypeError === "NetworkError when attempting to fetch resource.") {
         console.log('!! returning early because of network error..')

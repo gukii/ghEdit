@@ -6,12 +6,12 @@ import createSagaMiddleware from 'redux-saga'
 import createHistory from 'history/createHashHistory'
 import rootReducer from './reducers'
 
-import mySaga from './sagas/mySaga'
+import githubSagas from './sagas/githubSagas'
+import imgurSagas from './sagas/imgurSagas'
 
 import { saveState } from './helpers/localStorage'
 //import throttle from 'lodash/throttle'
 import { push } from 'react-router-redux'
-
 
 
 export const history = createHistory()
@@ -74,9 +74,10 @@ const store = createStore(
 )
 
 
-console.log('calling sagaMiddleware.run(mySaga)..mysaga:', mySaga)
 // then run the saga
-sagaMiddleware.run(mySaga)
+sagaMiddleware.run(githubSagas)
+//sagaMiddleware.run(imgurSagas)
+
 
 
 

@@ -126,7 +126,7 @@ class Settings extends Component {
 
 		this.props.changeTab('tab1')
 
-	}
+	} // End of onFormSubmit
 
 
 	render() {

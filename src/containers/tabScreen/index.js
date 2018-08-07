@@ -1,9 +1,7 @@
 import React from 'react'
-
-import { connect } from "react-redux"
-// import { withRouter } from 'react-router-dom'
-import { push } from 'react-router-redux' // goBack,
+import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 
 
@@ -11,6 +9,7 @@ import { TabBar  } from 'antd-mobile'
 
 
 // feed
+
 import MdSpeakerNotesOff from 'react-icons/lib/md/speaker-notes-off'  // looks like 'no feed' icon
 import MdSpeakerNotes from 'react-icons/lib/md/speaker-notes' // feed icon
 

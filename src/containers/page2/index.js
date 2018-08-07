@@ -7,6 +7,8 @@ import { Button, NavBar, Icon, Carousel, WingBlank } from 'antd-mobile'
 
 // 'https://i.imgur.com/Pa5nZvr.jpg',
 
+
+
 class Page2 extends React.Component {
   state = {
     data: ['https://i.imgur.com/wyv6qVY.jpg', 'https://i.imgur.com/UUVHsU5.jpg'],
